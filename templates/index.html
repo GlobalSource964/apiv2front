@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <link rel="canonical" href="https://www.example.com/url/to/amp/document.html">
+  <meta name="viewport" content="width=device-width,minimum-scale=1">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ title }}">
+
+  <style amp-custom>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eee;
+  }
+
+  .header, .footer {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .header h1, .footer h1, .section-title {
+    margin: 0;
+    font-weight: bold;
+  }
+  .header a {
+      color: #25D366;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+  .section-title {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  .item {
+    position: relative;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .overlay {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+
+  .overlay a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+  .item {
+    flex-basis: calc(50% - 10px);
+  }
+
+  amp-img {
+    width: 100%;
+  }
+
+  .overlay a {
+    display: block;
+    padding: 10px 0;
+  }
+
+  .advertise-space {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 20px 0;
+      margin-top: 20px;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .advertise-space p {
+      margin-right: 20px;
+    }
+
+    .advertise-space a {
+      color: #25D366;
+      font-weight: bold;
+    }
+
+</style>
+</head>
+ <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebPage",
+      "headline": "{{ title }}",
+      "datePublished": "2023-06-10T00:00:00Z"
+    }
+  </script>
+<body>
+  <div class="header">
+    <h1><a href="/">{{ title }}</a> </h1>
+  </div>
+
+  <h1 class="section-title">VİP İlanlar</h1>
+  <div class="advertise-space">
+    <p>Bu alanda ilan vermek için:</p>
+      <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20VİP%20alanına%20reklam%20vermek%20istiyorum" target="_blank">🟢 WhatsApp</a>
+  </div>
+  <div class="flex-container">
+    {% for item in ust|slice:":16" %}
+        <div class="item">
+          <amp-img src="{{ item.resim }}" width="100" height="200" layout="responsive"></amp-img>
+          <div class="overlay">
+            <a href="tel:{{ item.original_telefon }}">☎ {{ item.telefon }}</a>
+              <br />
+            <a href="https://wa.me/+{{ item.original_telefon }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20bilgi%20alabilirmiyim." target="_blank">🟢 WhatsApp</a>
+          </div>
+        </div>
+    {% endfor %}
+      {% if ust|length < 16 %}
+          <div class="item">
+            <div class="overlay">
+              <p>Reklam vermek için:</p>
+                <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20VİP%20alanına%20reklam%20vermek%20istiyorum" target="_blank">🟢 WhatsApp</a>
+            </div>
+          </div>
+      {% endif %}
+  </div>
+
+  <h1 class="section-title">Premium İlanlar</h1>
+  <div class="advertise-space">
+    <p>Bu alanda ilan vermek için:</p>
+          <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20Premium%20alanına%20reklam%20vermek%20istiyorum" target="_blank">🟢 WhatsApp</a>
+  </div>
+  <div class="flex-container">
+    {% for item in orta|slice:":16" %}
+    <div class="item">
+      <amp-img src="{{ item.resim }}" width="100" height="200" layout="responsive"></amp-img>
+      <div class="overlay">
+        <a href="tel:{{ item.original_telefon }}">☎ {{ item.telefon }}</a>
+          <br />
+        <a href="https://wa.me/+{{ item.original_telefon }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20bilgi%20alabilirmiyim." target="_blank">🟢 WhatsApp</a>
+      </div>
+    </div>
+    {% endfor %}
+        {% if orta|length < 16 %}
+          <div class="item">
+            <div class="overlay">
+              <p>Reklam vermek için:</p>
+            <a href="https://wa.me/+13235915168?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20Premium%20alanına%20reklam%20vermek%20istiyorum" target="_blank">🟢 WhatsApp</a>
+            </div>
+          </div>
+        {% endif %}
+  </div>
+
+  <h1 class="section-title">Standart İlanlar</h1>
+  <div class="advertise-space">
+    <p>Bu alanda ilan vermek için:</p>
+          <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20Standart%20alanına%20reklam%20vermek%20istiyorum" target="_blank">🟢 WhatsApp</a>
+  </div>
+  <div class="flex-container">
+    {% for item in alt %}
+    <div class="item">
+      <amp-img src="{{ item.resim }}" width="100" height="200" layout="responsive"></amp-img>
+      <div class="overlay">
+        <a href="tel:{{ item.original_telefon }}">☎ {{ item.telefon }}</a>
+          <br />
+        <a href="https://wa.me/+{{ item.original_telefon }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20bilgi%20alabilirmiyim." target="_blank">🟢 WhatsApp</a>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="item">
+        <div class="overlay">
+          <p>Bu alana Reklam vermek için:</p>
+          <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20Standart%20alanına%20reklam%20vermek%20istiyorum" target="_blank">🟢 WhatsApp</a>
+        </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <h1>{{ title }}</h1>
+  </div>
+</body>
+</html>

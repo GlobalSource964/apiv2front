@@ -1,0 +1,71 @@
+from collections import defaultdict
+from django.shortcuts import render
+import requests
+from django.http import HttpResponse
+from django.shortcuts import render
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def format_domain(domain):
+    domain = domain.replace('www.', '').replace('.online', '')
+    if 'escorts' in domain:
+        domain = domain.replace('escorts', ' Escort')
+    elif 'escrots' in domain:
+        domain = domain.replace('escrots', ' Escort')
+    elif 'escros' in domain:
+        domain = domain.replace('escros', ' Escort')
+    else:
+        domain = domain.replace('escort', ' Escort')
+    domain = domain.replace('.', ' ')
+    return domain.title()
+
+
+def index(request):
+    original_domain = request.META['HTTP_HOST']
+    domain = request.META['HTTP_HOST']
+    domain = domain.replace('www.', '')
+    whatsapp_number = '+447537129402'
+    print(original_domain)
+
+    # Format the domain to a readable title.
+    formatted_domain = format_domain(original_domain)
+
+    response = requests.get('https://apiv2.ayasescorts.online/api/v2/ilanlar', params={'domain': domain})
+    if response.status_code == 200:
+        try:
+            data = response.json()
+        except ValueError:  # includes simplejson.decoder.JSONDecodeError eror verir
+            print('Decoding JSON has failed')
+            data = []
+    else:
+        print(f"API Request failed with status code {response.status_code}")
+        data = []
+
+    ust = []
+    orta = []
+    alt = []
+    for item in data:
+        resim = item.get('resimler', [{}])[0].get('resim_url', '') if item.get('resimler', []) else ''
+        original_telefon = item.get('telefon', '')
+        telefon = format_phone_number(original_telefon)
+        paket = item.get('paket', [])
+        if paket:
+            paket_pozisyon = paket[0].get('pozisyon', '')
+            if paket_pozisyon == 'ust':
+                ust.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon})
+            elif paket_pozisyon == 'orta':
+                orta.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon})
+            elif paket_pozisyon == 'alt':
+                alt.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon})
+
+    return render(request, 'index.html', {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number})
+
+
+def format_phone_number(num):
+    clean_num = str(num)[2:]  # Convert to string and remove the first two digits ('90')
+    formatted_num = "0 ({}) {} {}".format(clean_num[:3], clean_num[3:6], clean_num[6:])
+    return formatted_num
+
+
