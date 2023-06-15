@@ -1,7 +1,8 @@
+import os
 from collections import defaultdict
 from django.shortcuts import render
 import requests
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.shortcuts import render
 import logging
 
@@ -22,17 +23,26 @@ def format_domain(domain):
     return domain.title()
 
 
+def get_api_url(request):
+    original_domain = request.META['HTTP_HOST']
+    if original_domain == '172.29.153.241':
+        return 'http://172.29.153.240/api/v2/ilanlar'
+    else:
+        return 'https://apiv2.ayasescorts.online/api/v2/ilanlar'
+
 def index(request):
     original_domain = request.META['HTTP_HOST']
     domain = request.META['HTTP_HOST']
     domain = domain.replace('www.', '')
     whatsapp_number = '+447537129402'
     print(original_domain)
+    url = get_api_url(request)
+
 
     # Format the domain to a readable title.
     formatted_domain = format_domain(original_domain)
 
-    response = requests.get('https://apiv2.ayasescorts.online/api/v2/ilanlar', params={'domain': domain})
+    response = requests.get(url, params={'domain': domain})
     if response.status_code == 200:
         try:
             data = response.json()
