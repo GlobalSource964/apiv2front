@@ -102,6 +102,50 @@
       font-weight: bold;
     }
 
+    /* new styles for the footer section */
+  .footer {
+    padding: 40px 20px;
+  }
+
+  .footer .footer-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .footer .footer-content .footer-section {
+    background-color: #444;
+    padding: 20px;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+
+  .footer .footer-content .footer-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .footer .footer-content .footer-section p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .footer .footer-content .footer-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  .footer .footer-content .footer-section ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .footer .footer-content .footer-section ul li {
+    margin-bottom: 10px;
+  }
 </style>
 </head>
  <script type="application/ld+json">
@@ -194,6 +238,14 @@
   </div>
 
   <div class="footer">
+    {% for blog in blogs %}
+        <div class="footer-section">
+            <h1 style="font-size: 20px">{{ blog.title }}</h1>
+            <p>{{ blog.content|truncatewords:20 }}</p>
+        </div>
+        <hr style="margin-bottom: 29px">
+    {% endfor %}
+
     <h1>{{ title }}</h1>
   </div>
 </body>

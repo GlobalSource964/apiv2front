@@ -38,7 +38,6 @@ def index(request):
     print(original_domain)
     url = get_api_url(request)
 
-
     # Format the domain to a readable title.
     formatted_domain = format_domain(original_domain)
 
@@ -46,12 +45,17 @@ def index(request):
     if response.status_code == 200:
         try:
             data = response.json()
+            for item in data:
+                domain_data = item.get('domain', [{}])[0]  # domain key'ini çekiyoruz
+                blogs = domain_data.get('blogs', [])  # blogs key'ini çekiyoruz
         except ValueError:  # includes simplejson.decoder.JSONDecodeError eror verir
             print('Decoding JSON has failed')
             data = []
+            blogs = []
     else:
         print(f"API Request failed with status code {response.status_code}")
         data = []
+        blogs = []
 
     ust = []
     orta = []
@@ -70,7 +74,7 @@ def index(request):
             elif paket_pozisyon == 'alt':
                 alt.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon})
 
-    return render(request, 'index.html', {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number})
+    return render(request, 'index.html', {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number, 'blogs': blogs})
 
 
 def format_phone_number(num):
