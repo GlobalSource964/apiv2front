@@ -263,6 +263,31 @@
 
   <div class="footer">
         {% for blog in blogs %}
+            <script type="application/ld+json">
+                {
+                  "@context": "http://schema.org",
+                  "@type": "BlogPosting",
+                  "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": "https://www.example.com/my-blog-post"
+                  },
+                  "headline": "{{ blog.title }}",
+
+                  "datePublished": "2021-09-01T00:00:00Z",
+                  "dateModified": "2021-09-02T00:00:00Z",
+                  "author": {
+                    "@type": "Person",
+                    "name": "Author Name"
+                  },
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "{{ title }}",
+
+                  },
+                  "description": "{{ title }} premium {{ title }} olarak sizlere daha iyi hizmet vermeye hazırdır. {{ title }} bilinirlik ve tecrübe için {{ title }}"
+                }
+            </script>
+
             <div class="footer-section">
                 <h2>{{ blog.title }}</h2>
                 <p>{{ blog.content|truncatewords:90 }}</p>
