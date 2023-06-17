@@ -7,7 +7,14 @@
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <title>{{ title }}</title>
   <meta name="description" content="{{ title }}">
-
+<style amp-boilerplate>
+        body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
+    </style>
+    <noscript>
+        <style amp-boilerplate>
+            body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}
+        </style>
+    </noscript>
   <style amp-custom>
   body {
     font-family: 'Roboto', sans-serif;
@@ -104,49 +111,55 @@
 
     /* new styles for the footer section */
   .footer {
-    padding: 40px 20px;
-  }
+            padding: 20px;
+            {#background: #f8f9fa;#}
+        }
+        .footer-section {
+            margin-bottom: 20px;
+        }
+        .footer-section h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .footer-section p {
+            font-size: 16px;
+        }
+        .footer-section .info {
+            font-size: 14px;
+            color: #6c757d;
+        }
 
-  .footer .footer-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .footer .footer-content .footer-section {
-    background-color: #444;
-    padding: 20px;
-    color: white;
-    border-radius: 5px;
-    margin-bottom: 20px;
-  }
-
-  .footer .footer-content .footer-section h2 {
-    font-size: 20px;
-    margin-bottom: 15px;
-  }
-
-  .footer .footer-content .footer-section p {
-    font-size: 16px;
-    margin-bottom: 10px;
-    line-height: 1.6;
-  }
-
-  .footer .footer-content .footer-section img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-  }
-
-  .footer .footer-content .footer-section ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-
-  .footer .footer-content .footer-section ul li {
-    margin-bottom: 10px;
-  }
+        .info span {
+        display: flex;
+        align-items: center;
+    }
+    .info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .info span {
+        display: flex;
+        align-items: center;
+    }
+    .icon {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+    }
+    .icon-author {
+        background: url('entrp-svgrepo-com.svg') no-repeat center center;
+    }
+    .icon-views {
+        background: url('entrp-svgrepo-com.svg') no-repeat center center;
+    }
+    .icon-date {
+        background: url('entrp-svgrepo-com.svg') no-repeat center center;
+    }
 </style>
+
 </head>
  <script type="application/ld+json">
     {
@@ -238,14 +251,18 @@
   </div>
 
   <div class="footer">
-    {% for blog in blogs %}
-        <div class="footer-section">
-            <h1 style="font-size: 20px">{{ blog.title }}</h1>
-            <p>{{ blog.content|truncatewords:40 }}</p>
-        </div>
-        <hr style="margin-bottom: 29px">
-    {% endfor %}
-
+        {% for blog in blogs %}
+            <div class="footer-section">
+                <h1>{{ blog.title }}</h1>
+                <p>{{ blog.content|truncatewords:40 }}</p>
+                <div class="info">
+                    <span>Yazar: {{ blog.author }}Admin</span> |
+                    <span>Görüntülenme: {{ blog.views }}</span> |
+                    <span>Ekleme Tarihi: {{ blog.created_at }}</span>
+                </div>
+            </div>
+            <hr style="margin-bottom: 29px">
+        {% endfor %}
     <h1>{{ title }}</h1>
   </div>
 </body>

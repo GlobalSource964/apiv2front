@@ -64,15 +64,17 @@ def index(request):
         resim = item.get('resimler', [{}])[0].get('resim_url', '') if item.get('resimler', []) else ''
         original_telefon = item.get('telefon', '')
         telefon = format_phone_number(original_telefon)
+        meta_title = item.get('meta_title', '')
+        meta_description = item.get('meta_description', '')
         paket = item.get('paket', [])
         if paket:
             paket_pozisyon = paket[0].get('pozisyon', '')
             if paket_pozisyon == 'ust':
-                ust.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon})
+                ust.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon, 'meta_title':meta_title, 'meta_description': meta_description})
             elif paket_pozisyon == 'orta':
-                orta.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon})
+                orta.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon, 'meta_title':meta_title, 'meta_description': meta_description})
             elif paket_pozisyon == 'alt':
-                alt.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon})
+                alt.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon, 'meta_title':meta_title, 'meta_description': meta_description})
 
     return render(request, 'index.html', {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number, 'blogs': blogs})
 
