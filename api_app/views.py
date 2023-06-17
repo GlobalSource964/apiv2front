@@ -99,7 +99,7 @@ def sitemap(request):
             xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                     http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
         <url>
-          <loc>{my_url}</loc>
+          <loc>https://{my_url}</loc>
           <lastmod>{last_mod_date}</lastmod>
         </url>
         </urlset>"""
