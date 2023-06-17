@@ -40,14 +40,17 @@ def index(request):
 
     # Format the domain to a readable title.
     formatted_domain = format_domain(original_domain)
-
     response = requests.get(url, params={'domain': domain})
     if response.status_code == 200:
         try:
             data = response.json()
+            blogs = []  # initialize blogs as an empty list
+            desired_domain = "172.29.153.241"
             for item in data:
-                domain_data = item.get('domain', [{}])[0]  # domain key'ini çekiyoruz
-                blogs = domain_data.get('blogs', [])  # blogs key'ini çekiyoruz
+                domain_data_list = item.get('domain', [{}])  # Get domain data list
+                for domain_data in domain_data_list:
+                    if domain_data == desired_domain:
+                        blogs = domain_data.get('blogs', [])  # If the domain is the desired domain, get blog data
         except ValueError:  # includes simplejson.decoder.JSONDecodeError eror verir
             print('Decoding JSON has failed')
             data = []
