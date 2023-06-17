@@ -44,12 +44,13 @@ def index(request):
     if response.status_code == 200:
         try:
             data = response.json()
+            desired_domain = request.META['HTTP_HOST']
             blogs = []  # initialize blogs as an empty list
-            desired_domain = "172.29.153.241"
+
             for item in data:
-                domain_data_list = item.get('domain', [{}])  # Get domain data list
+                domain_data_list = item.get('domain', [])  # Get domain data list, return empty list if not exist
                 for domain_data in domain_data_list:
-                    if domain_data == desired_domain:
+                    if desired_domain in domain_data.values():  # Check if the desired domain is in the domain_data dictionary
                         blogs = domain_data.get('blogs', [])  # If the domain is the desired domain, get blog data
         except ValueError:  # includes simplejson.decoder.JSONDecodeError eror verir
             print('Decoding JSON has failed')
