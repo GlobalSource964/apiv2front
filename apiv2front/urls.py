@@ -1,3 +1,4 @@
+from api_app import views
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
@@ -9,4 +10,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('robots.txt', serve, {'document_root': settings.BASE_DIR, 'path': 'robots.txt'}),
+    path('sitemap.xml', views.sitemap),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

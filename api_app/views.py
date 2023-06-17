@@ -1,11 +1,9 @@
+from datetime import datetime
 import os
-from collections import defaultdict
-from django.shortcuts import render
 import requests
 from django.http import HttpResponse, request
 from django.shortcuts import render
 import logging
-
 logger = logging.getLogger(__name__)
 
 
@@ -88,4 +86,22 @@ def format_phone_number(num):
     formatted_num = "0 ({}) {} {}".format(clean_num[:3], clean_num[3:6], clean_num[6:])
     return formatted_num
 
+
+
+def sitemap(request):
+    my_url = request.META['HTTP_HOST']
+    last_mod_date = datetime.now().isoformat()
+
+    # f-string kullanarak XML oluşturuyoruz.
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                    http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+        <url>
+          <loc>{my_url}</loc>
+          <lastmod>{last_mod_date}</lastmod>
+        </url>
+        </urlset>"""
+    return HttpResponse(xml, content_type='application/xml')
 
