@@ -263,7 +263,7 @@
         {% for blog in blogs %}
             <div class="footer-section">
                 <h2>{{ blog.title }}</h2>
-                <p>{{ blog.content|truncatewords:40 }}</p>
+                <p>{{ blog.content|truncatewords:90 }}</p>
                 <div class="info">
                     <span>By: {{ blog.author }}Admin</span> |
                     <span>Views: {{ blog.views }}</span> |
