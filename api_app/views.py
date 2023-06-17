@@ -100,7 +100,7 @@ def sitemap(request):
                     http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
         <url>
           <loc>https://{my_url}</loc>
-          <lastmod>{last_mod_date}</lastmod>
+            <lastmod>2023-06-17T13:28:56+00:00</lastmod>
         </url>
         </urlset>"""
     return HttpResponse(xml, content_type='application/xml')
