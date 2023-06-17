@@ -10,13 +10,13 @@ logger = logging.getLogger(__name__)
 def format_domain(domain):
     domain = domain.replace('www.', '').replace('.online', '')
     if 'escorts' in domain:
-        domain = domain.replace('escorts', ' Escortlar')
+        domain = domain.replace('escorts', ' Escort')
     elif 'escrots' in domain:
-        domain = domain.replace('escrots', ' Escortlar')
+        domain = domain.replace('escrots', ' Escort')
     elif 'escros' in domain:
-        domain = domain.replace('escros', ' Escortlar')
+        domain = domain.replace('escros', ' Escort')
     else:
-        domain = domain.replace('escort', ' Escortlar')
+        domain = domain.replace('escort', ' Escort')
     domain = domain.replace('.', ' ')
     return domain.title()
 
