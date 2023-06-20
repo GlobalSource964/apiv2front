@@ -28,6 +28,71 @@ def get_api_url(request):
     else:
         return 'https://apiv2.ayasescorts.online/api/v2/ilanlar'
 
+
+def amp(request):
+    original_domain = request.META['HTTP_HOST']
+    domain = request.META['HTTP_HOST']
+    domain = domain.replace('www.', '')
+    whatsapp_number = '+447537129402'
+    print(original_domain)
+    url = get_api_url(request)
+
+    # Format the domain to a readable title.
+    formatted_domain = format_domain(original_domain)
+    response = requests.get(url, params={'domain': domain})
+    if response.status_code == 200:
+        try:
+            data = response.json()
+            desired_domain = request.META['HTTP_HOST']
+            blogs = []  # initialize blogs as an empty list
+
+            for item in data:
+                domain_data_list = item.get('domain', [])  # Get domain data list, return empty list if not exist
+                for domain_data in domain_data_list:
+                    if desired_domain in domain_data.values():  # Check if the desired domain is in the domain_data dictionary
+                        blogs = domain_data.get('blogs', [])  # If the domain is the desired domain, get blog data
+        except ValueError:  # includes simplejson.decoder.JSONDecodeError eror verir
+            print('Decoding JSON has failed')
+            data = []
+            blogs = []
+    else:
+        print(f"API Request failed with status code {response.status_code}")
+        data = []
+        blogs = []
+
+    response = requests.get('https://apiv2.ayasescorts.online/api/v2/domainbacklink')
+    backlinks = response.json()
+
+    ust = []
+    orta = []
+    alt = []
+    for item in data:
+        resim = item.get('resimler', [{}])[0].get('resim_url', '') if item.get('resimler', []) else ''
+        original_telefon = item.get('telefon', '')
+        telefon = format_phone_number(original_telefon)
+        meta_title = item.get('meta_title', '')
+        meta_description = item.get('meta_description', '')
+        paket = item.get('paket', [])
+        if paket:
+            paket_pozisyon = paket[0].get('pozisyon', '')
+            if paket_pozisyon == 'ust':
+                ust.append(
+                    {'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon, 'meta_title': meta_title,
+                     'meta_description': meta_description})
+            elif paket_pozisyon == 'orta':
+                orta.append(
+                    {'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon, 'meta_title': meta_title,
+                     'meta_description': meta_description})
+            elif paket_pozisyon == 'alt':
+                alt.append(
+                    {'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon, 'meta_title': meta_title,
+                     'meta_description': meta_description})
+
+    return render(request, 'index.html',
+                  {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number,
+                   'blogs': blogs, 'original_domain': original_domain, 'backlinks': backlinks})
+
+
 def index(request):
     original_domain = request.META['HTTP_HOST']
     domain = request.META['HTTP_HOST']
