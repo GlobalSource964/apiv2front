@@ -170,6 +170,10 @@ def sitemap(request):
           <loc>https://{my_url}</loc>
             <lastmod>2023-06-17T13:28:56+00:00</lastmod>
         </url>
+        <url>
+          <loc>https://{my_url}/amp</loc>
+            <lastmod>2023-06-17T13:28:56+00:00</lastmod>
+        </url>
         </urlset>"""
     return HttpResponse(xml, content_type='application/xml')
 
