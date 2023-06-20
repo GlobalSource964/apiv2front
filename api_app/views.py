@@ -2,7 +2,7 @@ from datetime import datetime
 import os
 import requests
 from django.http import HttpResponse, request
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import logging
 logger = logging.getLogger(__name__)
 
@@ -108,3 +108,5 @@ def sitemap(request):
         </urlset>"""
     return HttpResponse(xml, content_type='application/xml')
 
+def redirect_to_amp(request):
+    return redirect("/amp/")
