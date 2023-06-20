@@ -8,7 +8,7 @@ from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', redirect_to_amp),
+    path('', redirect_to_amp),
     path('amp', index),
     path('robots.txt', serve, {'document_root': settings.BASE_DIR, 'path': 'robots.txt'}),
     path('sitemap.xml', views.sitemap),
