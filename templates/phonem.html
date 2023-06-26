@@ -204,6 +204,86 @@
     }
   </script>
 <body>
+  <div class="header">
+    <h1><a href="/">{{ title }}</a> </h1>
+  </div>
+
+  <h2 class="section-title" style="background-color: #6215c7; color: white; padding: 10px">VİP İlanlar</h2>
+  <div class="advertise-space">
+    <p>Bu alanda ilan vermek için:</p>
+      <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20VİP%20alanına%20reklam%20vermek%20istiyorum" rel="nofollow" target="_blank">🟢 WhatsApp</a>
+  </div>
+  <div class="flex-container">
+    {% for item in ust|slice:":16" %}
+        <div class="item">
+          <amp-img src="{{ item.resim }}" width="100" height="200" layout="responsive" alt="{{ item.meta_title }}"></amp-img>
+          <div class="overlay">
+            <a href="tel:{{ item.original_telefon }}" rel="nofollow">☎ {{ item.telefon }}</a>
+              <br />
+            <a href="https://wa.me/+{{ item.original_telefon }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20bilgi%20alabilirmiyim." rel="nofollow" target="_blank">🟢 WhatsApp</a>
+          </div>
+        </div>
+    {% endfor %}
+      {% if ust|length < 16 %}
+          <div class="item">
+            <div class="overlay">
+              <p>Reklam vermek için:</p>
+                <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20VİP%20alanına%20reklam%20vermek%20istiyorum" rel="nofollow" target="_blank">🟢 WhatsApp</a>
+            </div>
+          </div>
+      {% endif %}
+  </div>
+
+  <h2 class="section-title" style="background-color: green; color: white; padding: 10px">Premium İlanlar</h2>
+  <div class="advertise-space">
+    <p>Bu alanda ilan vermek için:</p>
+          <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20Premium%20alanına%20reklam%20vermek%20istiyorum" rel="nofollow" target="_blank">🟢 WhatsApp</a>
+  </div>
+  <div class="flex-container">
+    {% for item in orta|slice:":16" %}
+    <div class="item">
+      <amp-img src="{{ item.resim }}" width="100" height="200" layout="responsive" alt="{{ item.meta_title }}"></amp-img>
+      <div class="overlay">
+        <a href="tel:{{ item.original_telefon }}" rel="nofollow">☎ {{ item.telefon }}</a>
+          <br />
+        <a href="https://wa.me/+{{ item.original_telefon }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20bilgi%20alabilirmiyim." rel="nofollow" target="_blank">🟢 WhatsApp</a>
+      </div>
+    </div>
+    {% endfor %}
+        {% if orta|length < 16 %}
+          <div class="item">
+            <div class="overlay">
+              <p>Reklam vermek için:</p>
+            <a href="https://wa.me/+13235915168?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20Premium%20alanına%20reklam%20vermek%20istiyorum" rel="nofollow" target="_blank">🟢 WhatsApp</a>
+            </div>
+          </div>
+        {% endif %}
+  </div>
+
+  <h2 class="section-title" style="background-color: blue; color: white; padding: 10px">Standart İlanlar</h2>
+  <div class="advertise-space">
+    <p>Bu alanda ilan vermek için:</p>
+          <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20Standart%20alanına%20reklam%20vermek%20istiyorum" rel="nofollow" target="_blank">🟢 WhatsApp</a>
+  </div>
+  <div class="flex-container">
+    {% for item in alt %}
+    <div class="item">
+      <amp-img src="{{ item.resim }}" width="100" height="200" layout="responsive" alt="{{ item.meta_title }}"></amp-img>
+      <div class="overlay">
+        <a href="tel:{{ item.original_telefon }}" rel="nofollow">☎ {{ item.telefon }}</a>
+          <br />
+        <a href="https://wa.me/+{{ item.original_telefon }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20bilgi%20alabilirmiyim." rel="nofollow" target="_blank">🟢 WhatsApp</a>
+      </div>
+    </div>
+    {% endfor %}
+    <div class="item">
+        <div class="overlay">
+          <p>Bu alana Reklam vermek için:</p>
+          <a href="https://wa.me/{{ whatsapp }}?text=Merhaba,size%20{{title}}'dan%20yazıyorum%20Standart%20alanına%20reklam%20vermek%20istiyorum" rel="nofollow" target="_blank">🟢 WhatsApp</a>
+        </div>
+    </div>
+  </div>
+
   <div class="footer">
         {% for blog in blogs %}
             <script type="application/ld+json">
@@ -233,7 +313,7 @@
 
             <div class="footer-section">
                 <h2>{{ blog.title }}</h2>
-                <p>{{ blog.content}}</p>
+                <p>{{ blog.content|truncatewords:250 }}</p>
                 <div class="info">
                     <span>By: {{ blog.author }}Admin</span> |
                     <span>Views: {{ blog.views }}</span> |
@@ -242,16 +322,16 @@
             </div>
             <hr style="margin-bottom: 29px">
         {% endfor %}
-        <h2>{{ title }}</h2>
-        <div class="backlink-container">
-            {% for backlink in backlinks %}
-                  <div class="backlink">
-                        <a href="https://{{ backlink.adi }}" target="_blank"> <h2>{{ backlink.meta_title }}️</h2></a>
-                        <p>{{ backlink.meta_description }} premium {{ backlink.meta_description }} olarak sizlere daha iyi hizmet vermeye hazırdır. {{ backlink.meta_description }} bilinirlik ve tecrübe için {{ title }}</p>
-                      <hr>
-                  </div>
-            {% endfor %}
-        </div>
+    <h2>{{ title }}</h2>
+    <div class="backlink-container">
+    {% for backlink in backlinks %}
+      <div class="backlink">
+        <a href="https://{{ backlink.adi }}" target="_blank"> <h2>{{ backlink.meta_title }}️</h2></a>
+        <p>{{ backlink.meta_description }} premium {{ backlink.meta_description }} olarak sizlere daha iyi hizmet vermeye hazırdır. {{ backlink.meta_description }} bilinirlik ve tecrübe için {{ title }}</p>
+      <hr>
+      </div>
+    {% endfor %}
+  </div>
   </div>
 </body>
 </html>
