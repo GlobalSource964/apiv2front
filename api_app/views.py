@@ -88,7 +88,7 @@ def amp(request):
                     {'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon, 'meta_title': meta_title,
                      'meta_description': meta_description})
 
-    return render(request, 'index.html.html',
+    return render(request, 'phonem.html',
                   {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number,
                    'blogs': blogs, 'original_domain': original_domain, 'backlinks': backlinks})
 
@@ -146,7 +146,7 @@ def index(request):
             elif paket_pozisyon == 'alt':
                 alt.append({'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon, 'meta_title':meta_title, 'meta_description': meta_description})
 
-    return render(request, 'phonem.html', {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number, 'blogs': blogs, 'original_domain':original_domain, 'backlinks': backlinks})
+    return render(request, 'index.html', {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number, 'blogs': blogs, 'original_domain':original_domain, 'backlinks': backlinks})
 
 
 def format_phone_number(num):
