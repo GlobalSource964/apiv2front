@@ -30,7 +30,6 @@ def get_api_url(request):
     else:
         return 'https://apiv2.ayasescorts.online/api/v2/ilanlar'
 
-@cache_page(60 * 30)
 def amp(request):
     original_domain = request.META['HTTP_HOST']
     domain = request.META['HTTP_HOST']
