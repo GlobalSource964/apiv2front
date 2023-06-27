@@ -4,6 +4,8 @@ import requests
 from django.http import HttpResponse, request
 from django.shortcuts import render, redirect
 import logging
+from django.views.decorators.cache import cache_page
+
 logger = logging.getLogger(__name__)
 
 
@@ -28,7 +30,7 @@ def get_api_url(request):
     else:
         return 'https://apiv2.ayasescorts.online/api/v2/ilanlar'
 
-
+@cache_page(60 * 30)
 def amp(request):
     original_domain = request.META['HTTP_HOST']
     domain = request.META['HTTP_HOST']
@@ -92,7 +94,7 @@ def amp(request):
                   {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number,
                    'blogs': blogs, 'original_domain': original_domain, 'backlinks': backlinks})
 
-
+@cache_page(60 * 30)
 def index(request):
     original_domain = request.META['HTTP_HOST']
     domain = request.META['HTTP_HOST']
