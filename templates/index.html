@@ -1,5 +1,5 @@
 <!doctype html>
-<html amp>
+<html lang="tr">
 <head>
   <meta charset="utf-8">
   <link rel="canonical" href="https://{{ original_domain }}">
@@ -25,46 +25,6 @@
 <meta name="twitter:title" content="{{ title }}">
 <meta name="twitter:description" content="{{ title }} premium {{ title }} olarak sizlere daha iyi hizmet vermeye hazırdır. {{ title }} bilinirlik ve tecrübe için {{ title }}">
 <meta name="twitter:image" content="https://images2.imgbox.com/2a/77/5EuJD4gt_o.png">
-    <noscript>
-        <style amp-boilerplate>
-            body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}
-        </style>
-    </noscript>
-    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-  <style amp-custom>
-    /* Genel Stiller */
-    .container {
-      display: flex;
-      flex-direction: row;
-    }
-
-    .sidebar {
-      width: 25%;
-      padding: 1em;
-      background-color: #f0f0f0;
-    }
-    a {
-      text-decoration: none;
-    }
-
-    .content {
-      width: 75%;
-      padding: 1em;
-    }
-
-    /* Geniş ekranlar için özelleştirilmiş stiller */
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-
-      .sidebar, .content {
-        width: 100%;
-      }
-    }
-  </style>
-  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
-
 </head>
  <script type="application/ld+json">
     {
@@ -75,35 +35,44 @@
     }
   </script>
 <body>
-   <div class="header">
-    <h1><a href="/">{{ title }}</a> </h1>
-  </div>
   <div class="container">
-    <div class="sidebar">
-      {% for backlink in backlinks %}
-        <div class="backlink">
-          <a href="https://{{ backlink.adi }}" target="_blank">
-            <h2>{{ backlink.meta_title }}️</h2>
-          </a>
-          <p>{{ backlink.meta_description }} premium {{ backlink.meta_description }} olarak sizlere daha iyi hizmet vermeye hazırdır. {{ backlink.meta_description }} bilinirlik ve tecrübe için {{ title }}</p>
-          <hr>
-        </div>
-      {% endfor %}
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="mt-5"><a href="/">{{ title }}</a></h1>
+      </div>
     </div>
-    <div class="content">
-      {% for blog in blogs %}
-        <div class="footer-section">
-          <h2>{{ blog.title }}</h2>
-          <p>{{ blog.content}}</p>
-          <div class="info">
-            <span>By: {{ blog.author }}Admin</span> |
-            <span>Views: {{ blog.views }}</span> |
-            <span>Created: {{ blog.olusturma_tarihi }}</span>
+    <div class="row">
+      <div class="col-md-3">
+        {% for backlink in backlinks %}
+        <div class="card mt-4">
+          <div class="card-body">
+            <a href="https://{{ backlink.adi }}" target="_blank">
+              <h2 class="card-title">{{ backlink.meta_title }}️</h2>
+            </a>
+            <p class="card-text">{{ backlink.meta_description }} premium {{ backlink.meta_description }} olarak sizlere daha iyi hizmet vermeye hazırdır. {{ backlink.meta_description }} bilinirlik ve tecrübe için {{ title }}</p>
           </div>
         </div>
-        <hr style="margin-bottom: 29px">
-      {% endfor %}
+        {% endfor %}
+      </div>
+      <div class="col-md-9">
+        {% for blog in blogs %}
+        <div class="card mt-4">
+          <div class="card-body">
+            <h2 class="card-title">{{ blog.title }}</h2>
+            <p class="card-text">{{ blog.content}}</p>
+            <div>
+              <span>By: {{ blog.author }}Admin</span> |
+              <span>Views: {{ blog.views }}</span> |
+              <span>Created: {{ blog.olusturma_tarihi }}</span>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
     </div>
   </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
