@@ -88,7 +88,7 @@ def amp(request):
                     {'resim': resim, 'telefon': telefon, 'original_telefon': original_telefon, 'meta_title': meta_title,
                      'meta_description': meta_description})
 
-    return render(request, 'phonem.html',
+    return render(request, 'index.html.html',
                   {'ust': ust, 'orta': orta, 'alt': alt, 'title': formatted_domain, 'whatsapp': whatsapp_number,
                    'blogs': blogs, 'original_domain': original_domain, 'backlinks': backlinks})
 
