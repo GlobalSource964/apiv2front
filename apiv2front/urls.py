@@ -2,7 +2,7 @@ from api_app import views
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from api_app.views import index, redirect_to_amp, amp
+from api_app.views import index, amp
 from apiv2front import settings
 from django.views.static import serve
 

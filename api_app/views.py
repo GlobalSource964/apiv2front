@@ -178,6 +178,3 @@ def sitemap(request):
         </url>
         </urlset>"""
     return HttpResponse(xml, content_type='application/xml')
-
-def redirect_to_amp(request):
-    return redirect("/amp")
