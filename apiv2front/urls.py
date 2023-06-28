@@ -13,5 +13,5 @@ urlpatterns = [
     path('robots.txt', serve, {'document_root': settings.BASE_DIR, 'path': 'robots.txt'}),
     path('sitemap.xml', views.sitemap),
     path('yandex_304bf76ccfb461c4.html', serve, {'document_root': settings.BASE_DIR, 'path': 'yandex_304bf76ccfb461c4.html'}),
-
+    path('yandex_f4c50a18f25e6b20.html', serve, {'document_root': settings.BASE_DIR, 'path': 'yandex_f4c50a18f25e6b20.html'}),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
