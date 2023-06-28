@@ -170,11 +170,11 @@ def sitemap(request):
                     http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
         <url>
           <loc>https://{my_url}</loc>
-            <lastmod>2023-06-20T13:28:56+00:00</lastmod>
+            <lastmod>2023-06-28T04:30:56+00:00</lastmod>
         </url>
         <url>
           <loc>https://{my_url}/amp</loc>
-            <lastmod>2023-06-20T13:28:56+00:00</lastmod>
+            <lastmod>2023-06-28T04:28:56+00:00</lastmod>
         </url>
         </urlset>"""
     return HttpResponse(xml, content_type='application/xml')
